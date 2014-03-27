@@ -1,0 +1,60 @@
+import java.awt.event.ActionListener; 
+import java.awt.event.ActionEvent;
+import javax.swing.JButton;
+
+public class CalculatorEngine implements ActionListener {
+	
+ Calculator parent; // a reference to the Calculator
+
+ Double num1, num2;
+ Double result;
+ String Txtresult;
+ String action;
+ 
+ // Constructor stores the reference to the 
+ // Calculator window in  the member variable parent
+ CalculatorEngine(Calculator parent){
+   this.parent = parent;
+ }
+
+ public void actionPerformed(ActionEvent e){
+ 
+   JButton clickedButton =  (JButton) e.getSource();
+   String dispFieldText = parent.getDisplayValue();
+   String clickedButtonLabel = clickedButton.getText();
+   parent.setDisplayValue(dispFieldText + clickedButtonLabel);
+   
+   Object src = e.getSource();
+      
+   if (src == parent.buttonPlus | src == parent.buttonMinus |src == parent.ButtonDivide | src == parent.buttonMultiply){
+	   
+   	   num1 = Double.parseDouble(dispFieldText);
+ 	   parent.setDisplayValue(null);        
+       action = clickedButtonLabel;  
+   }
+     
+     
+   if (src == parent.buttonEqual) {	   
+	   
+	   num2 = Double.parseDouble(dispFieldText);
+	   
+	   if (action == "+")
+	   {result = num1+num2;}
+	   else if (action == "-")
+	   {result = num1-num2;}
+	   else if (action == "/")
+	   {result = num1/num2;}
+	   else if (action == "*")
+	   {result = num1*num2;} 
+	      
+	   Txtresult = result.toString();
+	   parent.setDisplayValue(Txtresult); 
+	   
+	   action = null;
+	   
+	    };
+ } 
+ 
+ 
+}
+
